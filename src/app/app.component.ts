@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
+import * as ingredientsJSON from '../assets/ingredients.json';
+import * as recipesJSON from '../assets/validation.json';
+
 
 @Component({
   selector: 'app-root',
@@ -14,6 +17,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.loadModel();
+    console.log(ingredientsJSON)
+    console.log(recipesJSON)
   }
 
   async loadModel() {
