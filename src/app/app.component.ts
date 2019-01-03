@@ -31,6 +31,7 @@ export class AppComponent implements OnInit {
     var recipeIndex = Math.floor(Math.random() * Math.floor(recipesJSON.length));
     var myRecipes = recipesJSON.default;
     this.ingredients = myRecipes[recipeIndex].ingredients;
+    this.actualCuisine = myRecipes[recipeIndex].cuisine;
     console.log("New Recipe: " + this.ingredients)
 
     //one-hot encode recipe for model prediction
@@ -42,6 +43,9 @@ export class AppComponent implements OnInit {
       }
     }
     this.encodedRecipe = tf.tensor(this.recipe);
+    this.encodedRecipe = this.encodedRecipe.reshape([1, ingredientsJSON.default.length]);
+    console.log(this.encodedRecipe);
+
   }
 
   async loadModel() {
@@ -59,7 +63,8 @@ export class AppComponent implements OnInit {
         console.log(output);
         // Save predictions on the component
         this.predictions = Array.from(output.dataSync());
-        console.log(this.predictions);
+        //console.log(this.predictions);
+
     });
   }
 }
