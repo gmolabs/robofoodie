@@ -1,9 +1,4 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div style="">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-</div>
 <button (click)="loadRecipe()">Next Recipe</button>
 <ul>
   <li *ngFor="let ingredient of ingredients">
@@ -11,7 +6,7 @@
   </li>
 </ul>
 <div class="">
-  Robofoodie sez: {{ prediction }}
+  Predicted cuisine: {{ predictedCuisine }}, {{ certainty | percent : '1.1-1' }} confidence
 </div>
 <div class="">
   Actual cuisine: {{ actualCuisine }}

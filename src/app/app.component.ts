@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 import * as ingredientsJSON from '../assets/ingredients.json';
 import * as recipesJSON from '../assets/validation.json';
+import * as cuisinesJSON from '../assets/cuisines.json';
 
 
 @Component({
@@ -19,12 +20,12 @@ export class AppComponent implements OnInit {
   encodedRecipe: tf.tensor;
   actualCuisine: any;
   predictedCuisine: any;
-  cuisines: any;
+  certainty: any;
 
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.loadModel();
     this.loadRecipe();
-    this.loadModel();
   }
 
   loadRecipe() {
@@ -46,13 +47,14 @@ export class AppComponent implements OnInit {
     this.encodedRecipe = this.encodedRecipe.reshape([1, ingredientsJSON.default.length]);
     console.log(this.encodedRecipe);
 
+    this.predict(this.encodedRecipe);
+
   }
 
   async loadModel() {
     console.log("Loading model...");
     this.model = await tf.loadModel('/assets/model.json');
     console.log("Model loaded");
-    this.predict(this.encodedRecipe);
   }
 
   async predict(recipeData:tf.tensor) {
@@ -64,8 +66,19 @@ export class AppComponent implements OnInit {
         // Save predictions on the component
         this.predictions = Array.from(output.dataSync());
         //console.log(this.predictions);
-        var myPrediction = console.log(Math.max(...this.predictions))
-        console.log(myPrediction)
+        var predictionIndex = this.predictions.indexOf(Math.max(...this.predictions))
+        this.certainty = Math.max(...this.predictions)
+        // var predictionIndex = 0;
+        // var topPrediction = 0;
+        // for (var i = 0; i < cuisinesJSON.default.length; i++ ) {
+        //   if (this.predictions[i] > topPrediction) {
+        //     topPrediction = this.predictions[i];
+        //     predictionIndex = i;
+        //   }
+        // }
+        this.predictedCuisine = cuisinesJSON.default[predictionIndex];
+        //console.log(predictedCuisine)
+
     });
   }
 }
