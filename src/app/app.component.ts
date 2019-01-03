@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
     var recipeIndex = Math.floor(Math.random() * Math.floor(recipesJSON.length));
     var myRecipes = recipesJSON.default;
     this.ingredients = myRecipes[recipeIndex].ingredients;
+    console.log("New Recipe: " + this.ingredients)
   }
 
   async loadModel() {
