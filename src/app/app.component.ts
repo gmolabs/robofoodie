@@ -14,17 +14,27 @@ export class AppComponent implements OnInit {
   title = 'robofoodie';
   model: tf.Model;
   prediction: any;
+  ingredients: any;
+  cuisine: any;
+
 
   ngOnInit() {
     this.loadModel();
-    console.log(ingredientsJSON)
-    console.log(recipesJSON)
+    this.loadRecipe();
+
+  }
+
+  loadRecipe() {
+    var recipeIndex = Math.floor(Math.random() * Math.floor(recipesJSON.length));
+    var myRecipes = recipesJSON.default;
+    this.ingredients = myRecipes[recipeIndex].ingredients;
   }
 
   async loadModel() {
     console.log("Loading model...");
     this.model = await tf.loadModel('/assets/model.json');
     console.log("Model loaded");
+
   }
 
   async predict() {
