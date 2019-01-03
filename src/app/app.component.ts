@@ -13,17 +13,18 @@ import * as recipesJSON from '../assets/validation.json';
 export class AppComponent implements OnInit {
   title = 'robofoodie';
   model: tf.Model;
-  prediction: any;
+  predictions: any;
   ingredients: any;
   recipe: any;
-  cuisine: any;
+  encodedRecipe: tf.tensor;
+  actualCuisine: any;
+  predictedCuisine: any;
   cuisines: any;
 
 
   ngOnInit() {
-    this.loadModel();
     this.loadRecipe();
-    this.predict();
+    this.loadModel();
   }
 
   loadRecipe() {
@@ -34,25 +35,31 @@ export class AppComponent implements OnInit {
 
     //one-hot encode recipe for model prediction
     this.recipe = new Array(ingredientsJSON.default.length).fill(0);
-    console.log(this.recipe);
     for(var i=0; i<this.ingredients.length; i++) {
       var j = ingredientsJSON.default.indexOf(this.ingredients[i]);
       if (j >= 0) {
         this.recipe[j] = 1;
       }
     }
-    console.log(this.recipe)
+    this.encodedRecipe = tf.tensor(this.recipe);
   }
 
   async loadModel() {
     console.log("Loading model...");
     this.model = await tf.loadModel('/assets/model.json');
     console.log("Model loaded");
+    this.predict(this.encodedRecipe);
   }
 
-  async predict() {
+  async predict(recipeData:tf.tensor) {
+    console.log(this.model);
     const pred = await tf.tidy(() => {
-        console.log("TODO: make prediction");
+        // Make and format the predications
+        const output = this.model.predict(recipeData) as any;
+        console.log(output);
+        // Save predictions on the component
+        this.predictions = Array.from(output.dataSync());
+        console.log(this.predictions);
     });
   }
 }
