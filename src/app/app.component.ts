@@ -64,7 +64,8 @@ export class AppComponent implements OnInit {
         // Save predictions on the component
         this.predictions = Array.from(output.dataSync());
         //console.log(this.predictions);
-
+        var myPrediction = console.log(Math.max(...this.predictions))
+        console.log(myPrediction)
     });
   }
 }
