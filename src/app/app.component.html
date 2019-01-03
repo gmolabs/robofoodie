@@ -4,13 +4,12 @@
     Welcome to {{ title }}!
   </h1>
 </div>
-
+<button (click)="loadRecipe()">Next Recipe</button>
 <ul>
   <li *ngFor="let ingredient of ingredients">
     {{ ingredient }}
   </li>
 </ul>
 
-<button ng-click="loadRecipe()">Next Recipe</button>
 
 <router-outlet></router-outlet>
