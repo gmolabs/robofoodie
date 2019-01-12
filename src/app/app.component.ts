@@ -28,14 +28,15 @@ export class AppComponent implements OnInit {
     this.loadRecipe();
   }
 
+  updateList(ingredient) {
+    console.log("update: "+ingredient);
+  }
+
   loadRecipe() {
     var recipeIndex = Math.floor(Math.random() * Math.floor(recipesJSON.length));
     var myRecipes = recipesJSON;
-    console.log(recipesJSON);
     this.ingredients = myRecipes[recipeIndex].ingredients;
     this.actualCuisine = myRecipes[recipeIndex].cuisine;
-    console.log("New Recipe: " + this.ingredients)
-
     //one-hot encode recipe for model prediction
     this.recipe = new Array(ingredientsJSON.length).fill(0);
     for(var i=0; i<this.ingredients.length; i++) {
@@ -46,39 +47,23 @@ export class AppComponent implements OnInit {
     }
     this.encodedRecipe = tf.tensor(this.recipe);
     this.encodedRecipe = this.encodedRecipe.reshape([1, ingredientsJSON.length]);
-    console.log(this.encodedRecipe);
-
     this.predict(this.encodedRecipe);
 
   }
 
   async loadModel() {
-    console.log("Loading model...");
-    this.model = await tf.loadModel('/assets/model.json');
-    console.log("Model loaded");
+    this.model = await tf.loadModel('./assets/model.json');
   }
 
   async predict(recipeData:any) {
-    console.log(this.model);
     const pred = await tf.tidy(() => {
         // Make and format the predications
         const output = this.model.predict(recipeData) as any;
-        console.log(output);
         // Save predictions on the component
         this.predictions = Array.from(output.dataSync());
-        //console.log(this.predictions);
         var predictionIndex = this.predictions.indexOf(Math.max(...this.predictions))
         this.certainty = Math.max(...this.predictions)
-        // var predictionIndex = 0;
-        // var topPrediction = 0;
-        // for (var i = 0; i < cuisinesJSON.length; i++ ) {
-        //   if (this.predictions[i] > topPrediction) {
-        //     topPrediction = this.predictions[i];
-        //     predictionIndex = i;
-        //   }
-        // }
         this.predictedCuisine = cuisinesJSON[predictionIndex];
-        //console.log(predictedCuisine)
 
     });
   }

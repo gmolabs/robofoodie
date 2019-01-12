@@ -1,10 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <button (click)="loadRecipe()">Next Recipe</button>
-<ul>
-  <li *ngFor="let ingredient of ingredients">
-    {{ ingredient }}
-  </li>
-</ul>
+  <ul *ngFor="let ingredient of ingredients">
+    <div ngClass="{inactive: active}"><input ngModel="active" type="checkbox" checked> {{ ingredient }}</div>
+  </ul>
 <div class="">
   Predicted cuisine: {{ predictedCuisine }}, {{ certainty | percent : '1.1-1' }} confidence
 </div>
