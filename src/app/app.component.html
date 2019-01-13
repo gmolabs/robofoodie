@@ -2,7 +2,10 @@
   <mat-card class="main-card">
     <mat-card-content>
       <button mat-raised-button color="basic" (click)="loadRecipe()">Load Recipe</button>
-      <button mat-raised-button color="primary" (click)="predict(encodedRecipe)">Make Prediction</button>
+      <button mat-raised-button
+        color="primary"
+        [disabled]=showPrediction
+        (click)="predict(encodedRecipe)">Make Prediction</button>
       <h2>Ingredients:</h2>
       <section *ngFor="let ingredient of ingredients">
         <div inactive>{{ingredient}}</div>

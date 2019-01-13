@@ -24,7 +24,6 @@ export class AppComponent implements OnInit {
   newIngredient: any;
   myRecipe: any;
   checked: any;
-  myRecipe = new FormControl('');
   showPrediction = false;
 
   async ngOnInit() {
@@ -55,7 +54,6 @@ export class AppComponent implements OnInit {
   }
 
   addIngredient(myNewIngredient) {
-    console.log("Ingredient added: "+myNewIngredient | json);
   }
 
   async loadModel() {
