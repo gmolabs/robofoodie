@@ -3,7 +3,7 @@ import * as tf from '@tensorflow/tfjs';
 import ingredientsJSON from '../assets/ingredients.json';
 import recipesJSON from '../assets/validation.json';
 import cuisinesJSON from '../assets/cuisines.json';
-
+import { FormControl } from '@angular/forms'
 
 @Component({
   selector: 'app-root',
@@ -21,7 +21,10 @@ export class AppComponent implements OnInit {
   actualCuisine: any;
   predictedCuisine: any;
   certainty: any;
-
+  newIngredient: any;
+  myRecipe: any;
+  checked: any;
+  myRecipe = new FormControl('');
 
   async ngOnInit() {
     await this.loadModel();
@@ -49,6 +52,10 @@ export class AppComponent implements OnInit {
     this.encodedRecipe = this.encodedRecipe.reshape([1, ingredientsJSON.length]);
     this.predict(this.encodedRecipe);
 
+  }
+
+  addIngredient(myNewIngredient) {
+    console.log("Ingredient added: "+myNewIngredient | json);
   }
 
   async loadModel() {

@@ -1,14 +1,20 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<button (click)="loadRecipe()">Next Recipe</button>
-  <ul *ngFor="let ingredient of ingredients">
-    <div ngClass="{inactive: active}"><input ngModel="active" type="checkbox" checked> {{ ingredient }}</div>
-  </ul>
-<div class="">
-  Predicted cuisine: {{ predictedCuisine }}, {{ certainty | percent : '1.1-1' }} confidence
-</div>
-<div class="">
-  Actual cuisine: {{ actualCuisine }}
-</div>
+<mat-card>
+  <mat-card-content>
+    <button mat-stroked-button color="primary" (click)="loadRecipe()">Next Recipe</button>
+    <h2>Ingredients:</h2>
+    <section *ngFor="let ingredient of ingredients">
+      <div inactive>{{ingredient}}</div>
+    </section>
+    <section>
+      <h3>
+        Predicted cuisine: {{ predictedCuisine }}, {{ certainty | percent : '1.1-1' }} confidence
+      </h3>
+      <h3>
+        Actual cuisine: {{ actualCuisine }}
+      </h3>
+    </section>
+  </mat-card-content>
+</mat-card>
 
 
 <router-outlet></router-outlet>
