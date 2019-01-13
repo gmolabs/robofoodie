@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
   myRecipe: any;
   checked: any;
   myRecipe = new FormControl('');
+  showPrediction = false;
 
   async ngOnInit() {
     await this.loadModel();
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
   }
 
   loadRecipe() {
+    this.showPrediction = false;
     var recipeIndex = Math.floor(Math.random() * Math.floor(recipesJSON.length));
     var myRecipes = recipesJSON;
     this.ingredients = myRecipes[recipeIndex].ingredients;
@@ -50,8 +52,6 @@ export class AppComponent implements OnInit {
     }
     this.encodedRecipe = tf.tensor(this.recipe);
     this.encodedRecipe = this.encodedRecipe.reshape([1, ingredientsJSON.length]);
-    this.predict(this.encodedRecipe);
-
   }
 
   addIngredient(myNewIngredient) {
@@ -71,7 +71,7 @@ export class AppComponent implements OnInit {
         var predictionIndex = this.predictions.indexOf(Math.max(...this.predictions))
         this.certainty = Math.max(...this.predictions)
         this.predictedCuisine = cuisinesJSON[predictionIndex];
-
+        this.showPrediction = true;
     });
   }
 }

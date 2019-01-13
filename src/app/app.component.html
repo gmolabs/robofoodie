@@ -1,20 +1,22 @@
-<mat-card>
-  <mat-card-content>
-    <button mat-stroked-button color="primary" (click)="loadRecipe()">Next Recipe</button>
-    <h2>Ingredients:</h2>
-    <section *ngFor="let ingredient of ingredients">
-      <div inactive>{{ingredient}}</div>
-    </section>
-    <section>
-      <h3>
-        Predicted cuisine: {{ predictedCuisine }}, {{ certainty | percent : '1.1-1' }} confidence
-      </h3>
-      <h3>
-        Actual cuisine: {{ actualCuisine }}
-      </h3>
-    </section>
-  </mat-card-content>
-</mat-card>
-
+<div class="container">
+  <mat-card class="main-card">
+    <mat-card-content>
+      <button mat-raised-button color="basic" (click)="loadRecipe()">Load Recipe</button>
+      <button mat-raised-button color="primary" (click)="predict(encodedRecipe)">Make Prediction</button>
+      <h2>Ingredients:</h2>
+      <section *ngFor="let ingredient of ingredients">
+        <div inactive>{{ingredient}}</div>
+      </section>
+      <section *ngIf="showPrediction">
+        <h3>
+          Predicted cuisine: {{ predictedCuisine }}, {{ certainty | percent : '1.1-1' }} confidence
+        </h3>
+        <h3>
+          Actual cuisine: {{ actualCuisine }}
+        </h3>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</div>
 
 <router-outlet></router-outlet>

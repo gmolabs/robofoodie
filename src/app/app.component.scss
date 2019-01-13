@@ -1,3 +1,4 @@
+
 .inactive {
   text-decoration: line-through;
 }
@@ -14,4 +15,21 @@
 
 .example-margin {
   margin: 0 10px;
+}
+
+.mat-raised-button {
+  margin: 4px;
+}
+
+.main-card {
+  margin-left: auto;
+  margin-right: auto;
+  min-width: 400px;
+  max-width: 800px;
+  position: relative;
+  top: 10px;
+}
+.container {
+  background-color: #fafafa;
+  height: 100%;
 }
