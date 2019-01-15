@@ -18,7 +18,11 @@
 }
 
 .mat-raised-button {
-  margin: 4px;
+  margin: 8px;
+}
+
+.mat-flat-button {
+  margin: 8px;
 }
 
 .main-card {
@@ -28,6 +32,12 @@
   max-width: 800px;
   position: relative;
   top: 10px;
+}
+
+.recipe-card {
+  margin-bottom: 10px;
+  max-width: 400px;
+  max-height: 400px;
 }
 .container {
   background-color: #fafafa;

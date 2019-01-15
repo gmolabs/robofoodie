@@ -5,11 +5,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/material';
+import { FormatCuisinesPipe } from './format-cuisines.pipe';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FormatCuisinesPipe
   ],
   imports: [
     BrowserModule,
@@ -19,7 +23,8 @@ import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/mate
     MatCheckboxModule,
     MatCardModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
