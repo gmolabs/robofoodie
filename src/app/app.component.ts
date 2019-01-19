@@ -39,7 +39,15 @@ export class AppComponent implements OnInit {
     "Defragging dough...",
     "Compiling carrots...",
     "Debugging kale...",
-    "Formatting cheeses..."
+    "Formatting cheeses...",
+    "Oversampling oranges...",
+    "Adjusting salt...",
+    "Monitoring hydration...",
+    "Simulating yeast...",
+    "Kneading algorithms...",
+    "Seasoning classifiers...",
+    "Slicing lists...",
+    "Whipping parameters..."
   ];
   loadingMessageIndex=0;
 
@@ -70,7 +78,9 @@ export class AppComponent implements OnInit {
 
 
   async ngOnInit() {
-    this.loadingMessageIndex=Math.floor(Math.random() * Math.floor(this.loadingMessage.length));
+    setInterval(()=> {
+      this.loadingMessageIndex=Math.floor(Math.random() * Math.floor(this.loadingMessage.length));
+ },1500);
     await this.loadModel();
     this.loadRecipe();
     this.modelLoaded=true;
