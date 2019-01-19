@@ -20,7 +20,7 @@
 
     <div id="guessContainer">
           <!-- <h1>Robofoodie Cuisine Predictor</h1> -->
-              <mat-form-field>
+              <mat-form-field *ngIf="modelLoaded">
                 <mat-select placeholder="Player's Guess" [(value)]="userGuess" [disabled]="showPrediction">
                   <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine.value">
                     {{cuisine.displayValue}}
