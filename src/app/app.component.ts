@@ -34,6 +34,14 @@ export class AppComponent implements OnInit {
   robofoodieScore = 0;
   playerScore = 0;
   totalTries = 0;
+  modelLoaded = false;
+  loadingMessage = [
+    "Defragging dough...",
+    "Compiling carrots...",
+    "Debugging kale...",
+    "Formatting cheeses..."
+  ];
+  loadingMessageIndex=0;
 
   @ViewChild('recipeCard') recipeCardRef: ElementRef;
   @ViewChild('recipeCardContent') recipeCardContentRef: ElementRef;
@@ -62,8 +70,10 @@ export class AppComponent implements OnInit {
 
 
   async ngOnInit() {
+    this.loadingMessageIndex=Math.floor(Math.random() * Math.floor(this.loadingMessage.length));
     await this.loadModel();
     this.loadRecipe();
+    this.modelLoaded=true;
   }
 
   updateList(ingredient) {

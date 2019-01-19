@@ -5,13 +5,15 @@
     </mat-card>
 
     <mat-card #recipeCard id="recipeCard">
-      <mat-card-title-group>
+      <mat-card-title-group *ngIf="modelLoaded">
         <mat-card-subtitle>Guess the cuisine of this mystery recipe!</mat-card-subtitle>
       </mat-card-title-group>
       <mat-card-content #recipeCardContent>
+          <h3 *ngIf="!modelLoaded">{{loadingMessage[loadingMessageIndex]}}</h3>
+          <mat-spinner *ngIf="!modelLoaded"></mat-spinner>
           <mat-list dense>
-            <mat-list-item  *ngFor="let ingredient of ingredients">{{ingredient}}</mat-list-item>
-          </mat-list>
+          <mat-list-item *ngFor="let ingredient of ingredients">{{ingredient}}</mat-list-item>
+        </mat-list>
       </mat-card-content>
     </mat-card>
 

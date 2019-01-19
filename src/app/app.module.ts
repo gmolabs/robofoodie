@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { MatButtonModule, MatCheckboxModule, MatCardModule, MatSelectModule, MatListModule, MatGridListModule } from '@angular/material';
 import { FormatCuisinesPipe } from './format-cuisines.pipe';
 import { MatIconModule } from '@angular/material/icon';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatSelectModule,
     MatListModule,
     MatGridListModule,
-    MatIconModule
+    MatIconModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
