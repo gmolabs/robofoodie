@@ -60,7 +60,7 @@
 
 
 #recipeCard {
-  height: 200px;
+  height: 180px;
   overflow: scroll;
   background-color: #fafafa;
   margin-bottom: 10px;
@@ -104,4 +104,9 @@ h4 {
   margin-right: auto;
   width: 30px;
   height: 30px;
+}
+
+.mat-card-subtitle {
+    color: #555555;
+    margin-bottom: 10px;
 }
