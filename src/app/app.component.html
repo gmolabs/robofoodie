@@ -1,50 +1,67 @@
 <div class="container">
-  <mat-card class="main-card">
-    <mat-card-content>
+    <mat-card id="scoreCard">
+      <div id="playerScore">Player: {{playerScore}} / {{totalTries}}</div>
+      <div id="robofoodieScore">Robofoodie: {{robofoodieScore}} / {{totalTries}}</div>
+    </mat-card>
+
+    <mat-card #recipeCard id="recipeCard">
+      <mat-card-title-group>
+        <mat-card-subtitle>Guess the cuisine of this mystery recipe!</mat-card-subtitle>
+      </mat-card-title-group>
+      <mat-card-content #recipeCardContent>
+          <mat-list dense>
+            <mat-list-item  *ngFor="let ingredient of ingredients">{{ingredient}}</mat-list-item>
+          </mat-list>
+      </mat-card-content>
+    </mat-card>
 
 
-      <!--<h2>Ingredients:</h2>-->
-      <mat-card class="recipe-card">
-        <mat-card-content>
-          <h4>Guess the cuisine of this mystery recipe!</h4>
+    <div id="guessContainer">
+          <!-- <h1>Robofoodie Cuisine Predictor</h1> -->
+              <mat-form-field>
+                <mat-select placeholder="Player's Guess" [(value)]="userGuess" [disabled]="showPrediction">
+                  <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine.value">
+                    {{cuisine.displayValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint><span color="primary">{{userGuessResult}}</span></mat-hint>
+              </mat-form-field>
+              <button mat-mini-fab
+                [ngClass]="{green:actualCuisine==userGuess && showPrediction}"
+                color="primary"
+                *ngIf="userGuess"
+                [disabled]="showPrediction || !userGuess"
+                (click)="predict(encodedRecipe)">
+                  <i class="material-icons">{{ userGuessIcon }}</i>
+              </button>
+            <div *ngIf="showPrediction" id="robofoodieGuess">
+              <mat-form-field>
+                <mat-select placeholder="Robofoodie's Guess" [(value)]="predictedCuisine" [disabled]="showPrediction">
+                  <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine.value">
+                    {{cuisine.displayValue}}
+                  </mat-option>
+                </mat-select>
+                <mat-hint><span color="primary">({{certainty | percent}} sure)</span></mat-hint>
+              </mat-form-field>
+              <button mat-mini-fab
+                [ngClass]="{green:actualCuisine==predictedCuisine && showPrediction}"
+                color="primary"
+                *ngIf="userGuess"
+                [disabled]="showPrediction || !userGuess">
+                  <i class="material-icons">{{ roboGuessIcon }}</i>
+              </button>
+              </div>
 
-            <ul *ngFor="let ingredient of ingredients">
-              <li>{{ingredient}}</li>
-            </ul>
-        </mat-card-content>
-      </mat-card>
-
-      <mat-form-field>
-        <mat-select  placeholder="Select cuisine" [(value)]="userGuess">
-          <mat-option *ngFor="let cuisine of cuisines" [value]="cuisine.value">
-            {{cuisine.displayValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-        <button mat-raised-button
-          color="primary"
-          [disabled]="showPrediction || !userGuess"
-          (click)="predict(encodedRecipe)">Guess!
-        </button>
-
-      <section *ngIf="showPrediction">
-        <h3>
-          Player's guess:
-        </h3>
-        <div>{{ userGuess | titlecase }}</div>
-        <h3>
-          Robofoodie's guess:
-        </h3>
-        <div>{{ predictedCuisine | titlecase }}, {{ certainty | percent : '1.1-1' }} confidence</div>
-        <h3>
-          Actual cuisine:
-        </h3>
-        <div>{{ actualCuisine | titlecase }}</div>
-      </section>
-      <button *ngIf="showPrediction" mat-raised-button color="primary" (click)="loadRecipe()">Next Recipe</button>
-
-    </mat-card-content>
-  </mat-card>
+              <div *ngIf="showPrediction">
+                <h4>
+                  Actual cuisine:
+                </h4>
+                <h2>
+                   {{ actualCuisine | formatCuisines }}
+                </h2>
+                <button *ngIf="showPrediction" mat-raised-button color="primary" (click)="loadRecipe()">Next Recipe</button>
+              </div>
+        </div>
 </div>
 
 <router-outlet></router-outlet>

@@ -4,11 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { MatButtonModule, MatCheckboxModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatCardModule, MatSelectModule, MatListModule, MatGridListModule } from '@angular/material';
 import { FormatCuisinesPipe } from './format-cuisines.pipe';
-import {MatSelectModule} from '@angular/material/select';
-
-
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,7 +22,10 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     FormsModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatListModule,
+    MatGridListModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

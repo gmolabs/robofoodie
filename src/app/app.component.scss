@@ -21,25 +21,76 @@
   margin: 8px;
 }
 
+
+.mat-mini-fab {
+  margin: 8px;
+}
+
 .mat-flat-button {
   margin: 8px;
 }
 
-.main-card {
+.main-section {
   margin-left: auto;
   margin-right: auto;
   min-width: 400px;
   max-width: 800px;
   position: relative;
   top: 10px;
+  background-color: #ffffff;
+  padding: 40px;
 }
 
-.recipe-card {
-  margin-bottom: 10px;
-  max-width: 400px;
-  max-height: 400px;
-}
+
+
 .container {
+  padding: 10px;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.green {
+  background-color: #00e676 !important;
+}
+
+.mat-form-field {
+  margin: 10px;
+}
+
+
+#recipeCard {
+  height: 200px;
+  overflow: scroll;
   background-color: #fafafa;
-  height: 100%;
+  margin-bottom: 10px;
+}
+
+
+#playerScore {
+  float: left;
+}
+
+#robofoodieScore {
+  float: right;
+}
+
+#scoreCard {
+  height: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #555555;
+}
+
+.mat-card-subtitle {
+  color: #000000;
+}
+
+#guessContainer {
+  text-align: center;
+}
+
+
+h4 {
+  color: #555555;
 }

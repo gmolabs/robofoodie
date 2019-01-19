@@ -4,6 +4,7 @@ import ingredientsJSON from '../assets/ingredients.json';
 import recipesJSON from '../assets/validation.json';
 import cuisinesJSON from '../assets/cuisines.json';
 import { FormControl } from '@angular/forms'
+import {ViewChild, ElementRef} from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,17 @@ export class AppComponent implements OnInit {
   checked: any;
   showPrediction = false;
   userGuess: any;
+  userGuessResult = "";
+  userGuessIcon = "arrow_forward";
+  roboGuessResult = "";
+  roboGuessIcon = "arrow_forward";
+  robofoodieScore = 0;
+  playerScore = 0;
+  totalTries = 0;
+
+  @ViewChild('recipeCard') recipeCardRef: ElementRef;
+  @ViewChild('recipeCardContent') recipeCardContentRef: ElementRef;
+
   cuisines = [{value: "brazilian", displayValue: "Brazilian"},
               {value: "british", displayValue: "British"},
               {value: "cajun_creole", displayValue: "Cajun Creole"},
@@ -59,6 +71,8 @@ export class AppComponent implements OnInit {
   }
 
   loadRecipe() {
+    this.recipeCardContentRef.nativeElement.scrollTop=0;
+    this.userGuessResult="";
     this.showPrediction = false;
     var recipeIndex = Math.floor(Math.random() * Math.floor(recipesJSON.length));
     var myRecipes = recipesJSON;
@@ -76,6 +90,7 @@ export class AppComponent implements OnInit {
     this.encodedRecipe = this.encodedRecipe.reshape([1, ingredientsJSON.length]);
 
     this.userGuess = null;
+    this.userGuessIcon = "arrow_forward";
   }
 
   addIngredient(myNewIngredient) {
@@ -87,6 +102,7 @@ export class AppComponent implements OnInit {
 
   async predict(recipeData:any) {
     const pred = await tf.tidy(() => {
+
         // Make and format the predications
         const output = this.model.predict(recipeData) as any;
         // Save predictions on the component
@@ -95,6 +111,23 @@ export class AppComponent implements OnInit {
         this.certainty = Math.max(...this.predictions)
         this.predictedCuisine = cuisinesJSON[predictionIndex];
         this.showPrediction = true;
+        if(this.actualCuisine==this.userGuess) {
+          this.userGuessResult="Correct!";
+          this.userGuessIcon="check";
+          this.playerScore++;
+        } else {
+          this.userGuessResult="Incorrect"
+          this.userGuessIcon="clear";
+        }
+        if(this.actualCuisine==this.predictedCuisine) {
+          this.roboGuessResult="Correct!";
+          this.roboGuessIcon="check";
+          this.robofoodieScore++;
+        } else {
+          this.roboGuessResult="Incorrect"
+          this.roboGuessIcon="clear";
+        }
+        this.totalTries++;
     });
   }
 }
