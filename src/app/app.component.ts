@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
     "Whipping parameters..."
   ];
   loadingMessageIndex=0;
+  refreshIntervalId: any;
 
   @ViewChild('recipeCard') recipeCardRef: ElementRef;
   @ViewChild('recipeCardContent') recipeCardContentRef: ElementRef;
@@ -78,11 +79,12 @@ export class AppComponent implements OnInit {
 
 
   async ngOnInit() {
-    setInterval(()=> {
+    this.refreshIntervalId = setInterval(()=> {
       this.loadingMessageIndex=Math.floor(Math.random() * Math.floor(this.loadingMessage.length));
  },1500);
     await this.loadModel();
     this.loadRecipe();
+    clearInterval(this.refreshIntervalId);
     this.modelLoaded=true;
   }
 
