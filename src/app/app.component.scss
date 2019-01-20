@@ -60,10 +60,16 @@
 
 
 #recipeCard {
-  height: 165px;
+  height: 170px;
   overflow: scroll;
   background-color: #fafafa;
   margin-bottom: 10px;
+}
+
+@media only screen and (max-device-height: 568px) {
+  #recipeCard {
+    height: 155px;
+  }
 }
 
 
