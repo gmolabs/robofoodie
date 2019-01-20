@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as tf from '@tensorflow/tfjs';
 import ingredientsJSON from '../assets/ingredients.json';
-import recipesJSON from '../assets/validation.json';
+import recipesJSON from '../assets/balanced.json';
 import cuisinesJSON from '../assets/cuisines.json';
 import { FormControl } from '@angular/forms'
 import {ViewChild, ElementRef} from '@angular/core';

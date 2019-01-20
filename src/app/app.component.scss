@@ -60,7 +60,7 @@
 
 
 #recipeCard {
-  height: 180px;
+  height: 165px;
   overflow: scroll;
   background-color: #fafafa;
   margin-bottom: 10px;
@@ -86,9 +86,6 @@
   color: #000000;
 }
 
-.mat-card-content {
-  text-align: center;
-}
 
 #guessContainer {
   text-align: center;
@@ -120,4 +117,9 @@ h3 {
 h2 {
   margin-top: 10px;
   margin-bottom: 10px;
+}
+
+.ingredient {
+  color: #555555;
+  font-size: 20px;
 }

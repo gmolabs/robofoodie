@@ -11,9 +11,8 @@
       <mat-card-content #recipeCardContent>
           <h3 *ngIf="!modelLoaded">{{loadingMessage[loadingMessageIndex]}}</h3>
           <mat-spinner *ngIf="!modelLoaded"></mat-spinner>
-          <mat-list dense>
-          <mat-list-item *ngFor="let ingredient of ingredients">{{ingredient}}</mat-list-item>
-        </mat-list>
+
+          <span class="ingredient" *ngFor="let ingredient of ingredients; last as isLast">{{ingredient}}<span *ngIf="!isLast">, </span></span>
       </mat-card-content>
     </mat-card>
 
